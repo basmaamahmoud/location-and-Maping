@@ -1,2 +1,2 @@
 # location-and-Maping
-how to calculate travelled distance 
+how to calculate travelled distanceon mapkit.
