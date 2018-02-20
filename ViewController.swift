@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
+// We have added CCLocationManagerDelegate and MKMapViewDelegate as classes we are inheriting from, we use it for location and using mapkit.
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var DistanceLabel: UILabel!
@@ -20,12 +21,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     @IBOutlet weak var LocateMe: UIButton!
     
-    var manager = CLLocationManager()
-    var CLLCoordTypeLocation: CLLocationCoordinate2D?
     
+    //We create a manager of type CLLocationManger 
+//  //We created an array of CLLocation’s and name that Location. 
+   
+    var manager = CLLocationManager()
     var location: [CLLocation] = []
     
     
+    
+    
+    
+    
+   // initiate some variables to use it for latitude and longitude used in distance calculating. 
+    
+    var CLLCoordTypeLocation: CLLocationCoordinate2D?
     
     var LAT:Double  = 0
     var LONG:Double  = 0
@@ -36,7 +46,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var LASTLat: Double = 0
     var LASTLong: Double = 0
     
-    var sourceItem: MKMapItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,34 +80,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         myMap.setRegion(region, animated: true)
         
-//        let CLLCoordType = CLLocationCoordinate2D(latitude: (location.first?.coordinate.latitude)!,longitude: (location.first?.coordinate.longitude)!)
-//
-//
-//        let anno = MKPointAnnotation();
-//        anno.coordinate = CLLCoordType;
-//        anno.title = "Start"
-//        myMap.addAnnotation(anno)
-        
        
         
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-        
-        if annotation.title! == "Destination" {
-            
-            annotationView.pinTintColor = UIColor.green
-            
-        } else {
-            
-            annotationView.pinTintColor = UIColor.red
-        }
-        
-        
-        return annotationView
-    }
+   
     
     
     @IBAction func LocateMe(_ sender: Any) {
