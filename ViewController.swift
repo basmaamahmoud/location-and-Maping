@@ -50,7 +50,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        //Setup our Location Manager, and our Map View
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
@@ -66,14 +66,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     
     
-    
+    // This function gets called every time our location change.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        // here we are storing our first latitude and longitude
         LAT = locations[0].coordinate.latitude
         LONG = locations[0].coordinate.longitude
         
+        // here we are storing all our latitudes and longitudes.
         location.append(locations[0] as CLLocation)
         
+        //The map will display our location, but it will be zoomed out. If we want to zoom into our location, the span refers to how zoomed in
+        // we actually are in the region. 
         let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
         
         let region:MKCoordinateRegion = MKCoordinateRegionMake(myMap.userLocation.coordinate, span)
@@ -86,16 +90,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
    
     
-    
+    // this button give us the coordinate that we want to start from it our distance calculation
     @IBAction func LocateMe(_ sender: Any) {
         
+        // here we got our first point of distance calculating coordinates
         FirLat = LAT
         FirLong = LONG
         
         
        CLLCoordTypeLocation = CLLocationCoordinate2D(latitude: LAT,longitude: LONG)
         
-       
+       // here we put our annotation on our mapkit(the start point)
         let anno = MKPointAnnotation();
         anno.coordinate = CLLCoordTypeLocation!;
         anno.title = "New Start"
@@ -107,13 +112,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
     }
     
+    // This button calculate the distance travelled from the first point where we tapped the locate button at.
     @IBAction func TaskButt(_ sender: Any) {
+        
         var distance:Double!
         
+        // here First and Last refers to the coordinate of the first pointyou are in when you tapped the locate button
+        // and the last point coordinate when you tapped task button
         let FIRST = CLLocation(latitude: FirLat, longitude: FirLong)
-        let xx = CLLocation(latitude: (location.first?.coordinate.latitude)!, longitude: (location.first?.coordinate.longitude)!)
-        
         let LAST = CLLocation(latitude: LAT, longitude: LONG)
+        
+        
+        // here xx and yy refer to the coordinates of first and last point you achieved since you opened the application
+        let xx = CLLocation(latitude: (location.first?.coordinate.latitude)!, longitude: (location.first?.coordinate.longitude)!)
         let yy = CLLocation(latitude: (location.last?.coordinate.latitude)!, longitude: (location.last?.coordinate.longitude)!)
         
         if LocateMe.isHidden == true{
@@ -128,8 +139,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
     
         
+        
+       
+        DistaneOut.text = String(intmax_t(distance))
+        
         myMap.removeAnnotations(myMap.annotations)
-       DistaneOut.text = String(intmax_t(distance))
         
         let anno = MKPointAnnotation();
         anno.coordinate = CLLCoordTypeLocation!;
@@ -144,7 +158,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         annoD.title = "Destination"
         myMap.addAnnotation(annoD)
-        //myMap.showsUserLocation = false
+        
         
     }
 }
