@@ -8,3 +8,9 @@
 ## Setup
 - In this application i used mapkit.
 
+## How to run it
+
+- tap the srat point button to locate the first point to start calculating distance from it.
+- tap the calculate button to calculate the distance from the start point.
+- Distance are calculated in meteres which is appeared in the white box under the map.
+
