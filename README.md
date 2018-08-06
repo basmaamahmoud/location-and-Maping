@@ -13,5 +13,3 @@
 - tap the srat point button to locate the first point to start calculating distance from it.
 - tap the calculate button to calculate the distance from the start point.
 - Distance are calculated in meteres which is appeared in the white box under the map.
-
-![alt text](Desktop/Simulator\ Screen\ Shot\ -\ iPhone\ 6\ -\ 2018-08-02\ at\ 21.13.56.png  "Description goes here")
